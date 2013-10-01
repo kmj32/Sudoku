@@ -1,0 +1,339 @@
+<html>
+
+<head>
+
+<title>KMJ32 Sudoku Javascript project</title>
+
+<style>
+a {text-decoration:none;} /* don't underline links */
+.bignum {font-size:2.5em; line-height:75%}
+.cell {width:50px;height:50px;}
+</style>
+
+</head>
+
+<body>
+
+<table border="2">
+	<tr>
+		<td>
+			<table border="1">
+				<tr>
+					<td><div class="cell" id="00">
+						<span class="hint" id="001" onclick="hintClicked(this)">1</span>
+						<span class="hint" id="002" onclick="hintClicked(this)">2</span><br/>
+						<span class="hint" id="003" onclick="hintClicked(this)">3</span>
+						<span class="hint" id="004" onclick="hintClicked(this)">4</span>
+						<span class="bignum" id="00big">0</span>
+					</div></td>
+					<td><div class="cell" id="01">
+						<span class="hint" id="011" onclick="hintClicked(this)">1</span>
+						<span class="hint" id="012" onclick="hintClicked(this)">2</span><br/>
+						<span class="hint" id="013" onclick="hintClicked(this)">3</span>
+						<span class="hint" id="014" onclick="hintClicked(this)">4</span>
+						<span class="bignum" id="01big">0</span>
+					</div></td>
+				</tr>
+				<tr>
+					<td><div class="cell" id="10">
+						<span class="hint" id="101" onclick="hintClicked(this)">1</span>
+						<span class="hint" id="102" onclick="hintClicked(this)">2</span><br/>
+						<span class="hint" id="103" onclick="hintClicked(this)">3</span>
+						<span class="hint" id="104" onclick="hintClicked(this)">4</span>
+						<span class="bignum" id="10big">0</span>
+					</div></td>
+					<td><div class="cell" id="11">
+						<span class="hint" id="111" onclick="hintClicked(this)">1</span>
+						<span class="hint" id="112" onclick="hintClicked(this)">2</span><br/>
+						<span class="hint" id="113" onclick="hintClicked(this)">3</span>
+						<span class="hint" id="114" onclick="hintClicked(this)">4</span>
+						<span class="bignum" id="11big">0</span>
+					</div></td>
+				</tr>
+			</table>
+		</td>
+		<td>
+			<table border="1">
+				<tr>
+					<td><div class="cell" id="02">
+						<span class="hint" id="021" onclick="hintClicked(this)">1</span>
+						<span class="hint" id="022" onclick="hintClicked(this)">2</span><br/>
+						<span class="hint" id="023" onclick="hintClicked(this)">3</span>
+						<span class="hint" id="024" onclick="hintClicked(this)">4</span>
+						<span class="bignum" id="02big">0</span>
+					</div></td>
+					<td><div class="cell" id="03">
+						<span class="hint" id="031" onclick="hintClicked(this)">1</span>
+						<span class="hint" id="032" onclick="hintClicked(this)">2</span><br/>
+						<span class="hint" id="033" onclick="hintClicked(this)">3</span>
+						<span class="hint" id="034" onclick="hintClicked(this)">4</span>
+						<span class="bignum" id="03big">0</span>
+					</div></td>
+				</tr>
+				<tr>
+					<td><div class="cell" id="12">
+						<span class="hint" id="121" onclick="hintClicked(this)">1</span>
+						<span class="hint" id="122" onclick="hintClicked(this)">2</span><br/>
+						<span class="hint" id="123" onclick="hintClicked(this)">3</span>
+						<span class="hint" id="124" onclick="hintClicked(this)">4</span>
+						<span class="bignum" id="12big">0</span>
+					</div></td>
+					<td><div class="cell" id="13">
+						<span class="hint" id="131" onclick="hintClicked(this)">1</span>
+						<span class="hint" id="132" onclick="hintClicked(this)">2</span><br/>
+						<span class="hint" id="133" onclick="hintClicked(this)">3</span>
+						<span class="hint" id="134" onclick="hintClicked(this)">4</span>
+						<span class="bignum" id="13big">0</span>
+					</div></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<table border="1">
+				<tr>
+					<td><div class="cell" id="20">
+						<span class="hint" id="201" onclick="hintClicked(this)">1</span>
+						<span class="hint" id="202" onclick="hintClicked(this)">2</span><br/>
+						<span class="hint" id="203" onclick="hintClicked(this)">3</span>
+						<span class="hint" id="204" onclick="hintClicked(this)">4</span>
+						<span class="bignum" id="20big">0</span>
+					</div></td>
+					<td><div class="cell" id="21">
+						<span class="hint" id="211" onclick="hintClicked(this)">1</span>
+						<span class="hint" id="212" onclick="hintClicked(this)">2</span><br/>
+						<span class="hint" id="213" onclick="hintClicked(this)">3</span>
+						<span class="hint" id="214" onclick="hintClicked(this)">4</span>
+						<span class="bignum" id="21big">0</span>
+					</div></td>
+				</tr>
+				<tr>
+					<td><div class="cell" id="30">
+						<span class="hint" id="301" onclick="hintClicked(this)">1</span>
+						<span class="hint" id="302" onclick="hintClicked(this)">2</span><br/>
+						<span class="hint" id="303" onclick="hintClicked(this)">3</span>
+						<span class="hint" id="304" onclick="hintClicked(this)">4</span>
+						<span class="bignum" id="30big">0</span>
+					</div></td>
+					<td><div class="cell" id="31">
+						<span class="hint" id="311" onclick="hintClicked(this)">1</span>
+						<span class="hint" id="312" onclick="hintClicked(this)">2</span><br/>
+						<span class="hint" id="313" onclick="hintClicked(this)">3</span>
+						<span class="hint" id="314" onclick="hintClicked(this)">4</span>
+						<span class="bignum" id="31big">0</span>
+					</div></td>
+				</tr>
+			</table>
+		</td>
+		<td>
+			<table border="1">
+				<tr>
+					<td><div class="cell" id="22">
+						<span class="hint" id="221" onclick="hintClicked(this)">1</span>
+						<span class="hint" id="222" onclick="hintClicked(this)">2</span><br/>
+						<span class="hint" id="223" onclick="hintClicked(this)">3</span>
+						<span class="hint" id="224" onclick="hintClicked(this)">4</span>
+						<span class="bignum" id="22big">0</span>
+					</div></td>
+					<td><div class="cell" id="23">
+						<span class="hint" id="231" onclick="hintClicked(this)">1</span>
+						<span class="hint" id="232" onclick="hintClicked(this)">2</span><br/>
+						<span class="hint" id="233" onclick="hintClicked(this)">3</span>
+						<span class="hint" id="234" onclick="hintClicked(this)">4</span>
+						<span class="bignum" id="23big">0</span>
+					</div></td>
+				</tr>
+				<tr>
+					<td><div class="cell" id="32">
+						<span class="hint" id="321" onclick="hintClicked(this)">1</span>
+						<span class="hint" id="322" onclick="hintClicked(this)">2</span><br/>
+						<span class="hint" id="323" onclick="hintClicked(this)">3</span>
+						<span class="hint" id="324" onclick="hintClicked(this)">4</span>
+						<span class="bignum" id="32big">0</span>
+					</div></td>
+					<td><div class="cell" id="33">
+						<span class="hint" id="331" onclick="hintClicked(this)">1</span>
+						<span class="hint" id="332" onclick="hintClicked(this)">2</span><br/>
+						<span class="hint" id="333" onclick="hintClicked(this)">3</span>
+						<span class="hint" id="334" onclick="hintClicked(this)">4</span>
+						<span class="bignum" id="33big">0</span>
+					</div></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+<p>Move count: <span id="counter">0</span><br/>
+
+<input type="button" onclick="undo()" value="Undo" />
+
+<script src="http://db.cs.pitt.edu/courses/cs1520/spring2013/assign/sudoku.js"></script> <!--this is the initial board-->
+
+<script>
+var boardStates; // array of states. boardStates[numMoves] is current state.
+var numMoves = 0;
+startUp();
+
+function startUp() {
+	boardStates = new Array();
+	numMoves = 0;
+	
+	//alert("About to call initializeState");
+	initializeState();
+	//alert("About to call updateBoard");
+	updateBoard();
+}
+
+function initializeState() {
+	/* A state is a 2-dimensional array (1st dim: row; 2nd dim: column) of cell states. Each cell-state is a 5-element array whose
+	0th element is the value of the "big number" in that cell (0 if the big number is hidden) and whose
+	elements 1 through 4 are boolean values for whether the corresponding hint should be displayed */
+	var thisState = getBlankState();
+	for(var i = 0; i < 4; i++) {
+		for(var j = 0; j < 4; j++) {
+			if(initBoard[i][j] != 0) {
+				//alert("About to call setCell for "+i+","+j);
+				thisState = setCell(thisState, i, j, initBoard[i][j]);
+			}
+		}
+	}
+	boardStates[0] = thisState;
+}
+
+function getBlankState() {
+	var state = new Array();
+	for(var i = 0; i < 4; i++) { // for each row
+		state[i] = new Array();
+		for(var j = 0; j < 4; j++) { // for each cell
+			state[i][j] = new Array(0, true, true, true, true); // no big number; all hints visible
+		}
+	}
+	return state;
+}
+
+function setCell(state, row, column, value) {
+	//alert("in setCell");
+
+	// update the cell itself
+	state[row][column][0] = value;
+	
+	//alert("updated cell");
+	
+	// turn off the corresponding hints in the row
+	for(var j = 0; j < 4; j++) {
+		//alert("trying to set state["+row+"]["+j+"]["+value+"] to false");
+		state[row][j][value] = false;
+		//alert("successfully set state["+row+"]["+j+"]["+value+"] to false");
+	}
+	
+	//alert("updated row");
+	
+	// turn off the corresponding hints in the column
+	for(var i = 0; i < 4; i++) {
+		state[i][column][value] = false;
+	}
+	
+	//alert("updated column");
+
+	// turn off the corresponding hints in the region
+	var regionY = (row % 2 == 0) ? (row) : (row-1);
+	var regionX = (column % 2 == 0) ? (column) : (column-1);
+	state[regionY][regionX][value] = false;
+	state[regionY][regionX+1][value] = false;
+	state[regionY+1][regionX][value] = false;
+	state[regionY+1][regionX+1][value] = false;
+	
+	//alert("updated region");
+	
+	return state;
+}
+
+function updateBoard() {
+	var currentState = boardStates[numMoves];
+	
+	for(var i = 0; i < 4; i++) {
+		for(var j = 0; j < 4; j++) {
+			var cellState = currentState[i][j];
+			if(cellState[0] != 0) { // if this cell's value has been set
+				var bigNum = document.getElementById(i+""+j+"big");
+				bigNum.innerHTML = cellState[0]; // display the correct value as a big number
+				bigNum.style.visibility = "visible";
+				// turn all the hints off, regardless of what the state says, because this cell is filled with a big number
+				document.getElementById(i+""+j+"1").style.visibility = "hidden";
+				document.getElementById(i+""+j+"2").style.visibility = "hidden";
+				document.getElementById(i+""+j+"3").style.visibility = "hidden";
+				document.getElementById(i+""+j+"4").style.visibility = "hidden";
+			}
+			else { // hide big number, and display hints as necessary
+				var bigNum = document.getElementById(i+""+j+"big");
+				bigNum.style.visibility = "hidden";
+				for(var k = 1; k <= 4; k++) {
+					if(cellState[k] == true) {
+						document.getElementById(i+""+j+""+k).style.visibility = "visible";
+					}
+					else {
+						document.getElementById(i+""+j+""+k).style.visibility = "hidden";
+					}
+				}
+			}
+		}
+	}
+	
+	document.getElementById("counter").innerHTML = numMoves;
+}
+
+function hintClicked(hint) {
+	var id = hint.id;
+	var row = Number(id.charAt(0));
+	var column = Number(id.charAt(1));
+	var value = Number(id.charAt(2));
+	
+	var newState = copyState(boardStates[numMoves]);
+	newState = setCell(newState, row, column, value);
+	boardStates[++numMoves] = newState;
+	updateBoard();
+	checkForDoneness();
+}
+
+function copyState(oldState) {
+	var newState = new Array();
+	for(var i = 0; i < 4; i++) {
+		newState[i] = new Array();
+		for(var j = 0; j < 4; j++) {
+			newState[i][j] = new Array();
+			for(var k = 0; k <= 4; k++) { // <= because indices run from 0 to 4, inclusive
+				newState[i][j][k] = oldState[i][j][k];
+			}
+		}
+	}
+	return newState;
+}
+
+function checkForDoneness() {
+	var currentState = boardStates[numMoves];
+	for(var i = 0; i < 4; i++) {
+		for(var j = 0; j < 4; j++) {
+			if(currentState[i][j][0] == 0) {
+				return; // this cell has not yet been solved
+			}
+		}
+	}
+	
+	// all cells have been filled
+	alert("Congratulations! You've solved the puzzle!");
+	startUp(); // reinitialize the game
+}
+
+function undo() {
+	if(numMoves > 0) {
+		numMoves--;
+		updateBoard();
+	}
+}
+</script>
+		
+</body>
+
+</html>
